@@ -8,4 +8,4 @@
 import Foundation
 
 /// A protocol representing an entity, conforming to Identifiable, Equatable, and Hashable.
-public protocol Entity: Identifiable, Equatable, Hashable {}
+public protocol Entity: Identifiable, Value {}
