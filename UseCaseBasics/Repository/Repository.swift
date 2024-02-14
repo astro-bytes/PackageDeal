@@ -29,7 +29,7 @@ public protocol Repository<Payload> {
     
     /// Asynchronously returns the current value of the data
     /// - Returns: The current state value of the data.
-    func get(within: TimeInterval) async throws -> Payload
+    func get() async throws -> Payload
     
     /// Sets the new value that is being updated.
     ///
@@ -49,7 +49,7 @@ extension Repository {
     ///
     /// - Returns: The current value of the repository's data.
     /// - Throws: An error if the retrieval fails.
-    public func get(within timeout: TimeInterval = .to(seconds: 5)) async throws -> Payload {
+    public func get(within timeout: TimeInterval) async throws -> Payload {
         // With a subscription
         // Subscribe and take the first value
         let result: DataResult<Payload> = try await data.first(timeoutAfter: timeout) { !$0.isLoading }

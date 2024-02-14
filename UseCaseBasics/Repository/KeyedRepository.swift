@@ -22,7 +22,7 @@ public protocol KeyedRepository<Key, Element>: Repository where Payload == [Key:
     ///
     /// - Parameter id: The identifier of the element to retrieve.
     /// - Returns: A `DataResult` containing the element with the specified identifier.
-    func get(by key: Key, within timeout: TimeInterval) async throws -> Element
+    func get(by key: Key) async throws -> Element
     
     /// Sets the provided element in the repository.
     ///
@@ -43,7 +43,7 @@ extension KeyedRepository where Payload == [Key: Element] {
     ///   - timeout: The maximum time to wait for the operation to complete. Default is 5 seconds.
     /// - Returns: The element with the specified identifier.
     /// - Throws: An error if the retrieval fails or the element is not found.
-    public func get(by key: Key, within timeout: TimeInterval = .to(seconds: 5)) async throws -> Element {
+    public func get(by key: Key, within timeout: TimeInterval) async throws -> Element {
         let payload = try await get(within: timeout)
         guard let value = payload[key] else {
             throw CoreError.notFound
