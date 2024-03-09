@@ -31,11 +31,6 @@ public protocol Repository<Payload> {
     /// - Returns: The current state value of the data.
     func get() async throws -> Payload
     
-    /// Sets the new value that is being updated.
-    ///
-    /// - Parameter payload: The new value that is being updated.
-    func set(_ payload: Payload)
-    
     /// Clears any cached data locally. A refresh should be called again to repopulate the `data`.
     func clear()
 }
