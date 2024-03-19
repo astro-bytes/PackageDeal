@@ -22,7 +22,7 @@ public protocol KeyedDataStore<Key, Element>: DataStore where Payload == [Key: E
     
     /// Sets or updates an element in the data store.
     /// - Parameter element: The element to be set or updated.
-    func set(_ element: Element)
+    func set(_ element: Element, for key: Key)
     
     /// Clears an element from the data store by its ID.
     /// - Parameter id: The ID of the element to clear.

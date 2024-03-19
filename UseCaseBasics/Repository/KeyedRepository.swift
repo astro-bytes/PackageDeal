@@ -27,6 +27,9 @@ public protocol KeyedRepository<Key, Element>: Repository where Payload == [Key:
     /// - Returns: A `DataResult` containing the element with the specified key.
     func get(by key: Key) async throws -> Element
     
+    /// - Parameter element: The element to set in the repository.
+    func set(_ element: Element, for key: Key)
+    
     /// Refreshes the element with the specified key in the repository asynchronously.
     ///
     /// - Parameter key: The key used to identify the element to refresh.
@@ -59,5 +62,12 @@ extension KeyedRepository where Payload == [Key: Element] {
             throw CoreError.notFound
         }
         return value
+    }
+}
+
+extension KeyedRepository where Element: Identifiable, Key == Element.ID {
+    // TODO: Comment & Test
+    public func set(_ element: Element) {
+        set(element, for: element.id)
     }
 }
